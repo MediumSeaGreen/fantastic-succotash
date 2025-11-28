@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem auto; max-width: 800px; background: #f8f9fb; color: #222; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        a.button, button { background: #2563eb; color: white; padding: 0.5rem 0.9rem; border-radius: 6px; text-decoration: none; border: none; cursor: pointer; }
+        a.button.secondary, button.secondary { background: #64748b; }
+        .card { background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1rem; }
+        .todo-title { font-weight: 700; margin: 0; }
+        .meta { color: #475569; font-size: 0.9rem; margin-top: 0.25rem; }
+        .resolved { text-decoration: line-through; color: #94a3b8; }
+        form.inline { display: inline; }
+        .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+        nav a { color: #2563eb; text-decoration: none; }
+        nav { font-size: 0.95rem; }
+        footer { margin-top: 2rem; color: #94a3b8; font-size: 0.85rem; text-align: center; }
+        label { display: block; margin-top: 0.75rem; font-weight: 600; }
+        input[type="text"], textarea, input[type="date"] { width: 100%; padding: 0.5rem; margin-top: 0.25rem; border-radius: 6px; border: 1px solid #cbd5e1; }
+        textarea { min-height: 120px; }
+        .checkbox { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Todo App</h1>
+        <nav>
+            <a href="{% url 'tasks:list' %}">Home</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        Manage your tasks with due dates and resolutions.
+    </footer>
+</body>
+</html>

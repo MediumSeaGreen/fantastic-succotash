@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="actions" style="justify-content: flex-end;">
+    <a class="button" href="{% url 'tasks:create' %}">New Todo</a>
+</div>
+
+{% if todos %}
+    {% for todo in todos %}
+        <div class="card">
+            <p class="todo-title {% if todo.is_resolved %}resolved{% endif %}">{{ todo.title }}</p>
+            {% if todo.description %}
+                <p>{{ todo.description }}</p>
+            {% endif %}
+            <p class="meta">
+                {% if todo.due_date %}Due: {{ todo.due_date }} · {% endif %}
+                Status: {% if todo.is_resolved %}Resolved{% else %}Open{% endif %}
+            </p>
+            <div class="actions">
+                <form class="inline" method="post" action="{% url 'tasks:toggle' todo.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="secondary">
+                        {% if todo.is_resolved %}Mark as open{% else %}Mark as resolved{% endif %}
+                    </button>
+                </form>
+                <a class="button secondary" href="{% url 'tasks:edit' todo.pk %}">Edit</a>
+                <form class="inline" method="post" action="{% url 'tasks:delete' todo.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" style="background:#dc2626;">Delete</button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <p>No todos yet. Create your first one!</p>
+    </div>
+{% endif %}
+{% endblock %}

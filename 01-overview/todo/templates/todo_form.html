@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2 style="margin-top:0;">{{ action }} Todo</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <label for="{{ form.title.id_for_label }}">Title</label>
+        {{ form.title.errors }}
+        {{ form.title }}
+
+        <label for="{{ form.description.id_for_label }}">Description</label>
+        {{ form.description.errors }}
+        {{ form.description }}
+
+        <label for="{{ form.due_date.id_for_label }}">Due date</label>
+        {{ form.due_date.errors }}
+        {{ form.due_date }}
+
+        <div class="checkbox">
+            {{ form.is_resolved }} <label for="{{ form.is_resolved.id_for_label }}">Resolved?</label>
+        </div>
+
+        <div class="actions" style="margin-top:1rem;">
+            <button type="submit">{{ action }}</button>
+            <a class="button secondary" href="{% url 'tasks:list' %}">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
